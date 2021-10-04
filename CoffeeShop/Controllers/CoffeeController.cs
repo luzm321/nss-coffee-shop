@@ -56,7 +56,7 @@ namespace CoffeeShop.Controllers
             }
 
             _coffeeRepository.Update(coffee);
-            return NoContent(); // NoContent() is used to indicate that the action was successful, but we don't have any data to return.
+            return NoContent(); 
         }
 
         // https://localhost:5001/api/coffee/id
@@ -64,7 +64,7 @@ namespace CoffeeShop.Controllers
         public IActionResult Delete(int id)
         {
             _coffeeRepository.Delete(id);
-            return NoContent();
+            return NoContent(); // NoContent() is used to indicate that the action was successful, but we don't have any data to return.
         }
     }
 }
