@@ -36,6 +36,7 @@ namespace CoffeeShop
             });
             // registering new repository to configure services for dependency injection in controller:
             services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+            services.AddTransient<ICoffeeRepository, CoffeeRepository>();
 
         }
 
