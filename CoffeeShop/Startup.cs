@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeShop.Repositories;
+
 
 namespace CoffeeShop
 {
@@ -32,6 +34,8 @@ namespace CoffeeShop
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoffeeShop", Version = "v1" });
             });
+            services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
