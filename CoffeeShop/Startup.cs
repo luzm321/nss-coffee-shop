@@ -34,6 +34,7 @@ namespace CoffeeShop
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoffeeShop", Version = "v1" });
             });
+            // registering new repository to configure services for dependency injection in controller:
             services.AddTransient<IBeanVarietyRepository, BeanVarietyRepository>();
 
         }
