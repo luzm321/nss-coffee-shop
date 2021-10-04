@@ -26,7 +26,7 @@ namespace CoffeeShop.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT c.Id, c.Title, c.BeanVarietyId, bv.Id [bvId], bv.Name, bv.Region, bv.Notes
+                    cmd.CommandText = @"SELECT c.Id, c.Title, c.BeanVarietyId, bv.Id [bvId], bv.Name, bv.Region, ISNULL(bv.Notes, 'N/A') [Notes]
                         FROM Coffee c
                         INNER JOIN BeanVariety bv
                         ON c.BeanVarietyId = bv.Id";
@@ -49,8 +49,11 @@ namespace CoffeeShop.Repositories
                                     Id = reader.GetInt32(reader.GetOrdinal("bvId")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
                                     Region = reader.GetString(reader.GetOrdinal("Region")),
-                                    Notes = reader.GetString(reader.GetOrdinal("Notes"))
                                 };
+                                if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                                {
+                                    coffee.BeanVariety.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                                }
                             }
 
                             coffees.Add(coffee);
@@ -75,7 +78,7 @@ namespace CoffeeShop.Repositories
                                                bv.Id [bvId], 
                                                bv.Name, 
                                                bv.Region, 
-                                               bv.Notes
+                                               ISNULL(bv.Notes, 'N/A') [Notes]
                                       FROM Coffee c
                                       INNER JOIN BeanVariety bv
                                       ON c.BeanVarietyId = bv.Id
